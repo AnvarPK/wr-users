@@ -6,6 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { styles } from "./style";
+import { format } from "date-fns";
 
 const UsersTable = (props) => {
   const { data } = props;
@@ -31,7 +32,7 @@ const UsersTable = (props) => {
               <TableCell align="right">{user.gender}</TableCell>
               <TableCell align="right">{user.email}</TableCell>
               <TableCell align="right">{user.username}</TableCell>
-              <TableCell align="right">{user.dob}</TableCell>
+              <TableCell align="right">{format(new Date(user.dob), 'MM/dd/yyyy')}</TableCell>
               <TableCell align="right">{user.phone}</TableCell>
             </TableRow>
           ))}
