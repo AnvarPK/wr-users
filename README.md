@@ -7,7 +7,6 @@
 5. User authentication
 6. User Search
 
-
 ## Deployed
 1. [App URL](https://wr-users.vercel.app/)
 2. [Platform: Vercel](https://vercel.com/)
