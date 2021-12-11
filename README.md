@@ -5,6 +5,7 @@
 3. Add User
 4. LocalStorage
 5. User authentication
+6. User Search
 
 
 ## Deployed

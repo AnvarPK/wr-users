@@ -1,5 +1,10 @@
 export const styles = {
-    addUser: {
-        textDecoration: 'none',
-    },
-}
+  addUser: {
+    textDecoration: "none",
+  },
+  wrapper: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: '10px',
+  },
+};
