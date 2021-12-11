@@ -4,13 +4,20 @@ import UsersTable from "../../components/userstable";
 import { fetchUser } from "../../redux/actions/users";
 
 const Home = () => {
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(false);
   const dispatch = useDispatch();
+  const users = useSelector((state) => state.users);
+
   useEffect(() => {
-    dispatch(fetchUser);
+    dispatch(fetchUser());
     // setLoader(false);
   }, []);
-  return <>{loader ? <div>Loading...</div> : <UsersTable data={[]} />}</>;
+
+  useEffect(() => {
+      console.log(users);
+  }, [users]);
+
+  return <>{loader ? <div>Loading...</div> : <UsersTable data={users} />}</>;
 };
 
 export default Home;

@@ -11,9 +11,9 @@ export const setUser = (payload) => ({
   payload,
 });
 
-export const fetchUser = async () => {
+export const fetchUser = () => {
+  return async (dispatch) => {
     const response = await userServices.fetchUsers();
-    console.log(response);
-    // const data = await response.json();
-    // return data;
+    dispatch(setUser(response.results));
+  };
 };

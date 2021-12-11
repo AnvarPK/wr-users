@@ -6,6 +6,7 @@ export const userReducer = (state = [], action) => {
     case ADD_USER:
       return [...state, payload];
     case SET_USERS:
+        console.log(payload)
       return [...payload];
     default:
       return state;
