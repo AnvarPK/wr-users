@@ -3,24 +3,37 @@ import {
   Avatar,
   Box,
   Button,
-  Checkbox,
   Container,
   CssBaseline,
-  FormControlLabel,
   TextField,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../redux/actions/login";
+import { userServices } from "../../services/users";
 import { styles } from "./style";
 
 const Login = () => {
-  const handleSubmit = (event) => {
+  const [useName, setUserName] = useState(null);
+  const [password, setPassword] = useState(null);
+  const dispatch = useDispatch();
+
+  const usernameChange = (e) => {
+    setUserName(e.target.value);
+  };
+
+  const passwordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
+    if (useName && password) {
+      const user = await userServices.authenticateUser(useName, password);
+      console.log(user);
+      dispatch(loginUser(user.isAuthenticated));
+    }
   };
   return (
     <Container component="main" maxWidth="xs">
@@ -37,11 +50,12 @@ const Login = () => {
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
+            id="useername"
+            label="username"
+            name="username"
             autoFocus
+            value={useName}
+            onChange={usernameChange}
           />
           <TextField
             margin="normal"
@@ -51,7 +65,8 @@ const Login = () => {
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
+            value={password}
+            onChange={passwordChange}
           />
           <Button
             type="submit"
