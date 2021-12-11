@@ -1,9 +1,11 @@
-const Home = () => {
-    return (
-        <div>
-            Home
-        </div>
-    )
-}
+import UsersTable from "../../components/userstable";
 
-export default Home
+const Home = () => {
+  return (
+    <>
+      <UsersTable data={[]} />
+    </>
+  );
+};
+
+export default Home;
