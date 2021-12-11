@@ -1,29 +1,40 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { FormControl, FormLabel, Radio, RadioGroup } from "@mui/material";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
+import CssBaseline from "@mui/material/CssBaseline";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import * as React from "react";
 import BasicDatePicker from "../basicdatepicker";
 
-const UserForm = () => {
+const UserForm = (props) => {
+  const { saveHandler } = props;
+  const [dob, setDOB] = React.useState({});
+
+  const dobChangeHandler = (val) => {
+    setDOB(val);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
+    const user = {
+      name: {
+        title: data.get("title"),
+        first: data.get("first"),
+        last: data.get("last"),
+      },
+      username: data.get("username"),
+      gender: data.get("gender"),
       email: data.get("email"),
       password: data.get("password"),
-    });
+      dob: dob.getTime(),
+      phone: data.get("phone"),
+    };
+    saveHandler(user);
   };
 
   return (
@@ -53,7 +64,7 @@ const UserForm = () => {
             </Grid>
             <Grid item xs={12} sm={4}>
               <TextField
-                name="firstName"
+                name="first"
                 fullWidth
                 id="firstName"
                 label="First Name"
@@ -64,7 +75,7 @@ const UserForm = () => {
                 fullWidth
                 id="lastName"
                 label="Last Name"
-                name="lastName"
+                name="last"
               />
             </Grid>
             <Grid item xs={12}>
@@ -78,11 +89,7 @@ const UserForm = () => {
             <Grid item xs={12}>
               <FormControl component="fieldset">
                 <FormLabel component="legend">Gender</FormLabel>
-                <RadioGroup
-                  row
-                  aria-label="gender"
-                  name="row-radio-buttons-group"
-                >
+                <RadioGroup row aria-label="gender" name="gender">
                   <FormControlLabel
                     value="female"
                     control={<Radio />}
@@ -119,7 +126,7 @@ const UserForm = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <BasicDatePicker />
+              <BasicDatePicker dobChange={dobChangeHandler} />
             </Grid>
             <Grid item xs={12}>
               <TextField
