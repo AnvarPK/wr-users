@@ -1,18 +1,14 @@
-import { Provider } from "react-redux";
+import {  useSelector } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
 import AppContainer from "./pages/container";
 import Login from "./pages/login";
-import configStore from "./redux/confStore";
-
-const store = configStore();
 
 function App() {
-  const user = false;
+  const user = useSelector((state) => state.login);
+
   return (
     <>
-      <Router>
-        <Provider store={store}>{user ? <AppContainer /> : <Login />}</Provider>
-      </Router>
+      <Router>{user.isAuthenticated ? <AppContainer /> : <Login />}</Router>
     </>
   );
 }

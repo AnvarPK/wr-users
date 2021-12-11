@@ -1,5 +1,6 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import {
+  Alert,
   Avatar,
   Box,
   Button,
@@ -9,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/actions/login";
 import { userServices } from "../../services/users";
 import { styles } from "./style";
@@ -18,6 +19,7 @@ const Login = () => {
   const [useName, setUserName] = useState(null);
   const [password, setPassword] = useState(null);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.login);
 
   const usernameChange = (e) => {
     setUserName(e.target.value);
@@ -31,8 +33,7 @@ const Login = () => {
     event.preventDefault();
     if (useName && password) {
       const user = await userServices.authenticateUser(useName, password);
-      console.log(user);
-      dispatch(loginUser(user.isAuthenticated));
+      dispatch(loginUser(user));
     }
   };
   return (
@@ -68,6 +69,11 @@ const Login = () => {
             value={password}
             onChange={passwordChange}
           />
+
+          {user.isAuthenticated === false ? (
+            <Alert severity="error">{user.username}</Alert>
+          ) : null}
+
           <Button
             type="submit"
             fullWidth
