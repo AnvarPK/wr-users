@@ -1,9 +1,10 @@
 # WR USers app
 ## Features
-1. Users List
-2. Add User
-3. LocalStorage
-4. User authentication
+1. Login
+2. Users List
+3. Add User
+4. LocalStorage
+5. User authentication
 
 
 ## Deployed
