@@ -7,4 +7,5 @@ export const APP_CONSTANTS = {
       HOME: '/',
       NEW_USER: '/new-user',
   },
+  STORAGE_KEY: "wr-users",
 };

@@ -1,3 +1,4 @@
+import { setLocalUsers } from "../../helper/setLocal";
 import { userServices } from "../../services/users";
 import { ADD_USER, SET_USERS } from "../consts";
 
@@ -14,6 +15,7 @@ export const setUser = (payload) => ({
 export const fetchUser = () => {
   return async (dispatch) => {
     const response = await userServices.fetchUsers();
+    setLocalUsers(response.results);
     dispatch(setUser(response.results));
   };
 };

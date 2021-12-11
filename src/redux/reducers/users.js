@@ -1,3 +1,4 @@
+import { getLocalUsers } from "../../helper/getLocal";
 import { ADD_USER, SET_USERS } from "../consts";
 
 export const userReducer = (state = [], action) => {

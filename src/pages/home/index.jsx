@@ -5,12 +5,10 @@ import { fetchUser } from "../../redux/actions/users";
 
 const Home = () => {
   const [loader, setLoader] = useState(true);
-  const dispatch = useDispatch();
+
   const users = useSelector((state) => state.users);
 
-  useEffect(() => {
-    dispatch(fetchUser());
-  }, []);
+
 
   useEffect(() => {
     if (users.length > 0) {
