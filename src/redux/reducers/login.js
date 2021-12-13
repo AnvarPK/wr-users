@@ -1,4 +1,4 @@
-import { LOGIN_USER } from "../consts";
+import { LOGIN_USER, LOGOUT_USER } from "../consts";
 
 const loginDefaultState = {
   username: "Invalid User",
@@ -11,6 +11,8 @@ export const loginReducer = (state = loginDefaultState, action) => {
     case LOGIN_USER:
       const { username, isAuthenticated } = payload;
       return { username, isAuthenticated };
+    case LOGOUT_USER:
+      return loginDefaultState;
     default:
       return state;
   }
